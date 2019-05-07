@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Suicide Rate</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../CSS/home.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+</head>
+
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <nav class="navbar navbar-default navbar-fixed-top"> <!-- navbar-fixed-top -->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Home</a>
+      </div>
+      <div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#home">ABOUT</a></li>
+            <li><a href="#article">ARTICLES</a></li>
+            <li><a href="#global">GLOBAL</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">QUESTIONS<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#continent">Continent</a></li>
+                <li><a href="#gender">Gender</a></li>
+                <li><a href="#age">Age</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav> 
+
+  <div id="home" class="parallax jumbotron">
+    <div class="container-fluid">
+      <div class="row text-center">
+        <h2>Suicide Rate Worldwide From 1985 - 2016</h2>
+        <h3>Data Visualisation</h3>
+        <a class="btn btn-primary" href="about.html" target="_blank" role="button">See More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container thematic_break_section">
+      <hr class="thematic_break">
+  </div> -->
+    
+  <div id="article" class="container article"> <!-- container-fluid 沒有寬度設定，通常用在滿版頁面-->
+    <!-- <hr class="thematic_break"> -->
+    <div class="row">
+      <figure class="col-sm-6">
+        <p>Article1</p>
+        <a href="#">
+          <img src="../pic/hang.jpg" alt="Article1">
+        </a>
+      </figure>
+      <figure class="col-sm-6">
+        <p>Article2</p>
+        <a href="#">
+          <img src="../pic/hang.jpg" alt="Article2">
+        </a>
+      </figure>
+    </div>
+    <div class="row"> 
+      <figure class="col-sm-6">
+        <p>Article3</p>
+        <a href="#">
+          <img src="../pic/hang.jpg" alt="Article3">
+        </a>
+      </figure>
+      <figure class="col-sm-6">
+        <p>Article4</p>
+        <a href="#">
+          <img src="../pic/hang.jpg" alt="Article4">
+        </a>
+      </figure>
+    </div>
+  </div>
+
+  <div id="global" class="container-fluid global">
+      <a href="AnimatedBarChart.html"><h1>Global</h1></a>
+      <p>About global suicide rate</p>
+    </div>
+
+  <div id="continent" class="container-fluid continent">
+    <a href="by_continent.html"><h1>Continent</h1></a>
+    <div class="wrapper" id="chart-line1">
+        <p>Suicides (per 100K) over Time by Continent</p>
+    </div>
+    
+    <script type="text/javascript">
+
+        d3.csv('../CSV/reformatted_continent_time.csv', function(error, data) {
+        data.forEach(function (d) {
+            d.year = +d.year;
+            d.africa = +d.africa;
+            d.americas = +d.americas;
+            d.asia = +d.asia;
+            d.europe = +d.europe;
+            d.oceania = +d.oceania;
+        });
+
+        var chart = InitiateChart(data, 'year', {
+            'Africa': {column: 'africa'},
+            'Americas': {column: 'americas'},
+            'Asia': {column: 'asia'},
+            'Europe': {column: 'europe'},
+            'Oceania': {column: 'oceania'}
+        }, {xAxis: 'Years', yAxis: 'Suicides per 100K'});
+        chart.bind("#chart-line1");
+        chart.render();
+        });
+
+    </script>
+    
+    <script src="../JS/suicidevis.js" charset="utf-8"></script>
+  </div>
+
+  <div id="gender" class="container-fluid gender">
+    <h1>Gender</h1>
+    <p>Suicide Rate - Gender</p>
+  </div>
+
+  <div id="age" class="container-fluid age">
+      <h1>Age</h1>
+      <p>Suicide Rate - Age</p>
+    </div>
+
+  <footer class="container">
+    <div class="row">
+      <p class="col-sm-4">&copy; FIT5147-Data Exploration & Visualisation</p>
+      <ul class="col-sm-8">
+        <li class="col-sm-1">
+          <a href="https://twitter.com/eileenchu8432"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/twitter.svg"></a>
+        </li>
+        <li class="col-sm-1">
+          <a href="https://www.facebook.com/eileen8432"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/facebook.svg"></a>
+        </li>
+        <li class="col-sm-1">
+          <a href="https://www.instagram.com/eileen8432/?hl=en"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/instagram.svg"></a>
+        </li>
+        <li class="col-sm-1">
+          <a href="https://medium.com/"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/medium.svg"></a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+<!-- 
+  <script>
+    window.onscroll = function() {myFunction()};
+    
+    var header = document.getElementById("myNavbar");
+    var sticky = header.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script> -->
+
+</body>
+</html>

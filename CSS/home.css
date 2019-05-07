@@ -1,0 +1,122 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  position: relative;
+}
+
+/* .top-container {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+} */
+
+/* #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}*/
+#article {padding:20px 0 50px;} 
+#global {padding-top:50px;height:100%;color: #4d4b4b; background-color: #f1f1f1;}
+#continent {padding-top:50px;height:100%;color: #4d4b4b; background-color: #f1f1f1;}
+#gender {padding-top:50px;height:500px;color: #4d4b4b; background-color: #f1f1f1;}
+#age {padding-top:50px;height:500px;color: #4d4b4b; background-color: #f1f1f1;}
+
+.parallax {
+  /*透明度*/
+  opacity: 0.7;
+  
+  /* Full height */
+  height: 100%; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron { /*. indicates a class selector; # indicates a id selector*/
+  display: flex;
+  align-items: center;
+  background-image: url('../pic/suicide.jpg');
+  background-size: cover;
+  color: #ffffff;
+  height: 600px;
+  text-shadow: 0.25px 0.25px 0.25px #000000;
+}
+
+.jumbotron h2 {
+  font-size: 43px;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+.jumbotron h3 {
+  margin: 0 0 20px; /*top ; right&left ; bottom*/
+  color: #fff;
+}
+
+div .row img{
+  margin: 5px 0 40px; /*top ; right&left ; bottom*/
+  width: 80%;
+  /* position: relative;
+  z-index: -1; */
+}
+
+/* img {
+  width: 100%;
+} */
+
+.col-md-6 { /*medium devices - screen width equal to or greater than 768px*/
+  margin: 0 0 30px;
+}
+
+.btn.btn-primary {
+  border-radius: 2px;
+  border: 0px;
+  color: #fbd1d5;
+  text-shadow: none;
+  background-color: #ffffff;
+}
+
+.btn.btn-primary:hover {
+  color: #ffffff;
+  background-color: #fbd1d5;
+}
+
+.btn-secondary {
+  background-color: #E8DFE0;
+  color: #ffffff;
+  margin: 0 0 30px;
+}
+
+.thematic_break_section {
+  padding: 40px 0 20px;
+}
+
+.thematic_break  {
+  border: 0px;
+  width: 700px;
+	background-color: #b9c5b9;
+	height: 3px;
+}
+
+footer {
+  font-size: 12px;
+  padding: 20px 0;
+}
+
+footer .col-sm-8 { /*small devices - screen width equal to or greater than 576px*/
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer li img {
+  width: 32px;
+  height: 32px;
+}

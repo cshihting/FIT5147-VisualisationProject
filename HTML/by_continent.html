@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+    <head>
+        <meta charset="utf-8"/>
+        <title>Suicide Rate Visualisation</title>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+        <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    </head>
+    
+    <body>
+        <div class="wrapper" id="chart-line1">
+            <h2>Suicides (per 100K) over Time by Continent</h2>
+        </div>
+        
+        <script type="text/javascript">
+
+            d3.csv('../CSV/reformatted_continent_time.csv', function(error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.africa = +d.africa;
+                d.americas = +d.americas;
+                d.asia = +d.asia;
+                d.europe = +d.europe;
+                d.oceania = +d.oceania;
+            });
+
+            var chart = InitiateChart(data, 'year', {
+                'Africa': {column: 'africa'},
+                'Americas': {column: 'americas'},
+                'Asia': {column: 'asia'},
+                'Europe': {column: 'europe'},
+                'Oceania': {column: 'oceania'}
+            }, {xAxis: 'Years', yAxis: 'Suicides per 100K'});
+            chart.bind("#chart-line1");
+            chart.render();
+            });
+
+        </script>
+        
+        <script src="../JS/suicidevis.js" charset="utf-8"></script>
+    
+    </body>
+    
+</html>
