@@ -5,12 +5,15 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../CSS/home.css">
+  <link rel="stylesheet" type="text/css" href="../CSS/global_style.css">
+  <link rel="stylesheet" type="text/css" href="../CSS/continent_style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
 </head>
 
 
@@ -92,9 +95,77 @@
   </div>
 
   <div id="global" class="container-fluid global">
-      <a href="AnimatedBarChart.html" style="color: inherit;text-decoration:underline;"><h1>Global</h1></a>
-      <p>About global suicide rate</p>
-    </div>
+    <a href="AnimatedBarChart.html" style="color: inherit;text-decoration:underline;"><h1>Global</h1></a>
+    <p>About global suicide rate</p>
+
+    <svg width="800" height="500"></svg>
+    <script>
+
+      d3.csv("../CSV/global_suicides.csv", function(error, data) {
+          if (error) {
+              throw error;
+          }
+
+          x.domain(data.map(function(d) { return d.year; }));
+          y.domain([0, d3.max(data, function(d) { return d.suicides_per_100k; })]);
+
+          // x axis
+          g.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "-1em")
+          .attr("dy", ".15em")
+          .attr("transform", function(d) {
+                  return "rotate(-75)" 
+              });
+
+          // x label name
+          g.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .append("text")
+          .attr("y", height - 240)
+          .attr("x", width - 400)
+          .attr("text-anchor", "end")
+          .attr("stroke", "black")
+          .text("Year");
+
+          // y label name
+          g.append("g")
+          .call(d3.axisLeft(y).tickFormat(function(d){
+              return d;
+          }).ticks(10))
+          .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 8)
+          .attr("dy", "-5.1em")
+          .attr("text-anchor", "end")
+          .attr("stroke", "black")
+          .text("Sucides per 100K");
+
+          g.selectAll(".bar")
+          .data(data)
+          .enter().append("rect")
+          .attr("class", "bar")
+          .on("mouseover", onMouseOver) //Add listener for the mouseover event
+          .on("mouseout", onMouseOut)   //Add listener for the mouseout event
+          .attr("x", function(d) { return x(d.year); })
+          .attr("y", function(d) { return y(d.suicides_per_100k); })
+          .attr("width", x.bandwidth())
+          .transition()
+          .ease(d3.easeLinear)
+          .duration(400)
+          .delay(function (d, i) {
+              return i * 50;
+          })
+          .attr("height", function(d) { return height - y(d.suicides_per_100k); });
+        });
+
+    </script>
+
+    <script src="../JS/global_suicide.js" charset="utf-8"></script>
+  </div>
 
   <div id="continent" class="container-fluid continent">
     <a href="by_continent.html" style="color: inherit;text-decoration:underline;"><h1>Continent</h1></a>
@@ -127,17 +198,75 @@
 
     </script>
     
-    <script src="../JS/suicidevis.js" charset="utf-8"></script>
+    <script src="../JS/continent_suicidevis.js" charset="utf-8"></script>
   </div>
 
   <div id="gender" class="container-fluid gender">
     <h1>Gender</h1>
-    <p>Suicide Rate - Gender</p>
+    <!-- <p>Suicide Rate - Gender</p> -->
+
+    <div class="wrapper" id="chart-line2">
+        <p>Suicides (per 100K) over Time by Gender</p>
+    </div>
+    
+    <script type="text/javascript">
+
+        d3.csv('../CSV/reformatted_sex_time.csv', function(error, data) {
+        data.forEach(function (d) {
+            d.year = +d.year;
+            d.Female = +d.Female;
+            d.Male = +d.Male;
+        });
+
+        var chart = InitiateChart(data, 'year', {
+            'Female': {column: 'Female'},
+            'Male': {column: 'Male'}
+        }, {xAxis: 'Years', yAxis: 'Suicides per 100K'});
+        chart.bind("#chart-line2");
+        chart.render();
+        });
+
+    </script>
+    
+    <script src="../JS/continent_suicidevis.js" charset="utf-8"></script>
   </div>
 
   <div id="age" class="container-fluid age">
       <h1>Age</h1>
-      <p>Suicide Rate - Age</p>
+      <!-- <p>Suicide Rate - Age</p> -->
+
+      <div class="wrapper" id="chart-line3">
+          <p>Suicides (per 100K) over Time by Age</p>
+      </div>
+      
+      <script type="text/javascript">
+  
+          d3.csv('../CSV/reformatted_age_time.csv', function(error, data) {
+          data.forEach(function (d) {
+              d.year = +d.year;
+              d["5-14"] = +d["5-14"];
+              d["15-24"] = +d["15-24"];
+              d["25-34"] = +d["25-34"];
+              d["35-54"] = +d["35-54"];
+              d["55-74"] = +d["55-74"];
+              d["75+"] = +d["75+"];
+          });
+  
+          var chart = InitiateChart(data, 'year', {
+              '5-14': {column: '5-14'},
+              '15-24': {column: '15-24'},
+              '25-34': {column: '25-34'},
+              '35-54': {column: '35-54'},
+              '55-74': {column: '55-74'},
+              '75+': {column: '75+'}
+          }, {xAxis: 'Years', yAxis: 'Suicides per 100K'});
+          chart.bind("#chart-line3");
+          chart.render();
+          });
+  
+      </script>
+      
+      <script src="../JS/continent_suicidevis.js" charset="utf-8"></script>
     </div>
 
   <footer class="container">
@@ -159,21 +288,6 @@
       </ul>
     </div>
   </footer>
-<!-- 
-  <script>
-    window.onscroll = function() {myFunction()};
-    
-    var header = document.getElementById("myNavbar");
-    var sticky = header.offsetTop;
-    
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
-    }
-  </script> -->
 
 </body>
 </html>

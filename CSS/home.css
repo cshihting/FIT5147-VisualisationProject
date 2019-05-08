@@ -16,10 +16,10 @@ body {
 
 /* #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}*/
 #article {padding:20px 0 50px;} 
-#global {padding-top:50px;height:100%;color: #4d4b4b; background-color: #f1f1f1;}
-#continent {padding-top:50px;height:100%;color: #4d4b4b; background-color: #f1f1f1;}
-#gender {padding-top:50px;height:500px;color: #4d4b4b; background-color: #f1f1f1;}
-#age {padding-top:50px;height:500px;color: #4d4b4b; background-color: #f1f1f1;}
+#global {padding-top:50px;height:100%;color: #4d4b4b; background-color: #ffffff;}
+#continent {padding-top:50px;height:100%;color: #4d4b4b; background-color: #ffffff;}
+#gender {padding-top:50px;height:80%;color: #4d4b4b; background-color: #ffffff;}
+#age {padding-top:50px;height:80%;color: #4d4b4b; background-color: #ffffff;}
 
 .parallax {
   /*透明度*/
@@ -75,18 +75,19 @@ div .row img {
 .btn.btn-primary {
   border-radius: 2px;
   border: 0px;
-  color: #fbd1d5;
+  color: #706f6f;
   text-shadow: none;
   background-color: #ffffff;
 }
 
 .btn.btn-primary:hover {
   color: #ffffff;
-  background-color: #fbd1d5;
+  background-color: #706f6f;
+  opacity: 0.6;
 }
 
 .btn-secondary {
-  background-color: #E8DFE0;
+  background-color: #706f6f;
   color: #ffffff;
   margin: 0 0 30px;
 }
