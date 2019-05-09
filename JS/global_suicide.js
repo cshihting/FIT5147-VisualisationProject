@@ -6,9 +6,9 @@ var svg = d3.select("svg"),
 svg.append("text")
     .attr("transform", "translate(100,0)")
     .attr("x", 50)
-    .attr("y", 50);
-    //.attr("font-size", "24px")
-    //.text("Sucides per 100K over Time");
+    .attr("y", 50)
+    .attr("font-size", "24px")
+    .text("Sucides per 100K over Time");
 
 var x = d3.scaleBand().range([0, width]).padding(0.4),
     y = d3.scaleLinear().range([height, 0]);
