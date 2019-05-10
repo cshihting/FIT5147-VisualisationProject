@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div {
+                height: 100px;
+                width: 70px;
+                background-color: steelblue;
+                margin:5px;
+            }
+        </style>
+        <style>
+                #container {
+                    height: 100px;
+                    width: 100px;
+                    background-color: black;
+                }
+            </style>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+        <div></div>
+        <div></div>
+        <div id="container"></div>
+        <p>Error: This is dummy error.</p>
+        <p>Warning:This is dummy warning.</p>
+        <p id="d3-p">D3 Tutorials</p>
+        <p id="d3-p"></p>
+        <p id="d3-p"></p>
+
+
+        <script>
+            d3.selectAll("p").style("color", function(d, i) {
+                var text = this.innerText;
+            
+                if (text.indexOf("Error") > 0) {
+                    return "red";
+                } else if (text.indexOf("Warning") >= 0) {
+                    return "yellow";
+                }
+            });
+
+            d3.selectAll("div")
+            .on("mouseover", function(){
+                d3.select(this)
+                    .style("background-color", "orange");
+
+                // Get current event info
+                console.log(d3.event);
+                
+                // Get x & y co-ordinates
+                console.log(d3.mouse(this));
+            })
+            .on("mouseout", function(){
+                d3.select(this)
+                    .style("background-color", "steelblue")
+            });
+
+            d3.select("#container")
+              .transition()
+              .duration(1500)
+              .delay(1000)
+              .style("background-color", "red");
+
+
+            var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", 200)
+                        .attr("height", 200);
+
+
+            var bar1 = svg.append("rect")
+                          .attr("fill", "green")
+                          .attr("x", 100)
+                          .attr("y", 20)
+                          .attr("height", 20)
+                          .attr("width", 10)
+
+            var bar2 = svg.append("rect")
+                          .attr("fill", "blue")
+                          .attr("x", 120)
+                          .attr("y", 20)
+                          .attr("height", 20)
+                          .attr("width", 10)
+
+            update();
+
+            function update() {
+                bar1.transition()
+                    .ease(d3.easeLinear)
+                    .duration(2000)
+                    .attr("height",100)
+
+                bar2.transition()
+                    .ease(d3.easeLinear)
+                    .duration(2000)
+                    .delay(2000)
+                    .attr("height",100)
+            }
+
+            
+            var myData = ["Hello World!", "Hello D3","Hello JavaScript"];
+            var p = d3.select("body")
+                      .selectAll("#d3-p")
+                      .data(myData)
+                      .text(function (d) {
+                            return d;
+                        });
+
+
+            var data = [4, 1, 6, 2, 8, 9];
+            var body = d3.select("body")
+                         .selectAll("span")
+                         .data(data)
+                         .enter()
+                         .append("span")
+                         .style('color', function(d) {
+                            if (d % 2 === 0) {
+                                return "green";
+                            } else {
+                                return "red";
+                            }
+                         })
+                         .text(function(d) { return d + " "; });
+        </script>
+    </body>
+</html>

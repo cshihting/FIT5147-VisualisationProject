@@ -53,13 +53,13 @@
       <div class="row text-center">
         <h2>Suicide Rate Worldwide From 1985 - 2016</h2>
         <h3>Data Visualisation</h3>
-        <a class="btn btn-primary" href="about.html" target="_blank" role="button">See More</a>
+        <a class="btn btn-primary" href="#quote" role="button">See More</a>
       </div>
     </div>
   </div>
 
   <div id="quote" class="container-fluid">
-    <h2>The bravest thing is to continue the life.</h2>
+    <h1>The bravest thing is to continue the life.</h1>
     <p>
       Death is life’s way of telling you you’re fired. Suicide is your way of telling life you quit. 
       Better identify who is at greatest risk for attempting and dying by suicide, so they can get the 
@@ -72,44 +72,56 @@
 
   <div id="global" class="container-fluid">
     <h1>Global</h1>
-    <p>About global suicide rate. <a href="AnimatedBarChart.html" style="color: inherit;text-decoration:underline;" target="blank">See more...</a></p>
-    <p>Type something...</p>
+    <p>About global suicide rate. 
+      <a href="global_suicide.html" 
+         style="color: inherit;text-decoration:underline;">See more...</a>
+    </p>
+    <div class="row">
+      <div class="col-sm-3">
+       <p>Type something...</p>
+      </div>
+      <div class="col-sm-9">
+        <img src="../pic/global_suicide.png" style="width: 80%;" alt="Global Suicide Worldwide">
+      </div>
+    </div>
   </div>
 
   <div id="continent" class="container-fluid">
     <h1>Continent</h1>
     <p>As you can see...</p>
-
+    <a href="continent_scatter.html" 
+       style="color: inherit;text-decoration:underline;">Check the scatter plot...
+    </a>
+    
     <div class="wrapper" id="continent-chart">
         <p>Suicides (per 100K) over Time by Continent</p>
     </div>
     
     <script type="text/javascript">
-
-        d3.csv('../CSV/reformatted_continent_time.csv', function(error, data) {
-          data.forEach(function (d) {
-              d.year = +d.year;
-              d.africa = +d.africa;
-              d.americas = +d.americas;
-              d.asia = +d.asia;
-              d.europe = +d.europe;
-              d.oceania = +d.oceania;
-          });
-
-          var chart = InitiateChart(data, 'year', {
-              'Africa': {column: 'africa'},
-              'Americas': {column: 'americas'},
-              'Asia': {column: 'asia'},
-              'Europe': {column: 'europe'},
-              'Oceania': {column: 'oceania'}
-          }, {xAxis: 'Years', yAxis: 'Suicides per 100K'});
-          chart.bind("#continent-chart");
-          chart.render();
+      d3.csv('../CSV/reformatted_continent_time.csv', function(error, data) {
+        data.forEach(function (d) {
+            d.year = +d.year;
+            d.africa = +d.africa;
+            d.americas = +d.americas;
+            d.asia = +d.asia;
+            d.europe = +d.europe;
+            d.oceania = +d.oceania;
         });
 
+        var chart = InitiateChart(data, 'year', {
+            'Africa': {column: 'africa'},
+            'Americas': {column: 'americas'},
+            'Asia': {column: 'asia'},
+            'Europe': {column: 'europe'},
+            'Oceania': {column: 'oceania'}
+        }, {xAxis: 'Years', yAxis: 'Suicides per 100K'});
+        chart.bind("#continent-chart");
+        chart.render();
+      });
     </script>
-    
-    <script src="../JS/continent_suicidevis.js" charset="utf-8"></script>
+
+    <!-- <script type='text/javascript' src='../JS/scatter.js'></script> -->
+    <script src="../JS/suicide_over_year.js" charset="utf-8"></script>
   </div>
 
   <div class="container thematic_break_section">
@@ -143,7 +155,7 @@
 
     </script>
     
-    <script src="../JS/continent_suicidevis.js" charset="utf-8"></script>
+    <script src="../JS/suicide_over_year.js" charset="utf-8"></script>
   </div>
 
   <div class="container thematic_break_section">
@@ -185,33 +197,31 @@
   
       </script>
       
-      <script src="../JS/continent_suicidevis.js" charset="utf-8"></script>
+      <script src="../JS/suicide_over_year.js" charset="utf-8"></script>
   </div>
 
 
   <div id="article" class="container article"> <!-- container-fluid 沒有寬度設定，通常用在滿版頁面-->
     <div class="row">
-      <figure class="col-sm-6">
+      <figure class="col-sm-3">
         <p>Economy</p>
         <a href="#">
           <img src="../pic/money.png" alt="Article1">
         </a>
       </figure>
-      <figure class="col-sm-6">
+      <figure class="col-sm-3">
         <p>Society</p>
         <a href="#">
           <img src="../pic/internet.png" alt="Article2">
         </a>
       </figure>
-    </div>
-    <div class="row"> 
-      <figure class="col-sm-6">
+      <figure class="col-sm-3">
         <p>Gender</p>
         <a href="#">
           <img src="../pic/sex.png" alt="Article3">
         </a>
       </figure>
-      <figure class="col-sm-6">
+      <figure class="col-sm-3">
         <p>Weather</p>
         <a href="#">
           <img src="../pic/snowflake.png" alt="Article4">

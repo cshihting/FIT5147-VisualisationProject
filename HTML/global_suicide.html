@@ -3,8 +3,17 @@
 <head>
     <meta charset="utf-8"/>
     <title>Suicide Rate over Time</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/global_style.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <style>
+        .bar {
+        fill: grey;
+        }
+        
+        .highlight {
+            fill: coral;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,6 +83,7 @@
 
     </script>
 
+    <button onclick="goBack()">Go Back</button>
     <script src="../JS/global_suicide.js" charset="utf-8"></script>
 
 </body>

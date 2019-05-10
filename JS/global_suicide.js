@@ -55,3 +55,7 @@ function onMouseOut(d, i) {
     d3.selectAll('.val')
     .remove()
 }
+
+function goBack() {
+    window.history.back();
+}
