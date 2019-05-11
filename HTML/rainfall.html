@@ -29,7 +29,7 @@
 </head>
 
 <body>
-        <h2>Suicides (per 100K) over Time by Continent</h2>
+    <h2>Rainfall(MM) of 6 Countries over Year</h2>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <!-- <script src="https://d3js.org/d3-scale.v3.min.js"></script> -->
 
@@ -46,19 +46,19 @@
  */ 
 
     // setup x 
-    var xValue = function(d) { return d.year;}, // data -> value
+    var xValue = function(d) { return d['year'];}, // data -> value
         xScale = d3.scale.linear().range([0, width]), // value -> display
         xMap = function(d) { return xScale(xValue(d));}, // data -> display
         xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
     // setup y
-    var yValue = function(d) { return d.suicide_per_100k;}, // data -> value
+    var yValue = function(d) { return d['rainfall(MM)'];}, // data -> value
         yScale = d3.scale.linear().range([height, 0]), // value -> display
         yMap = function(d) { return yScale(yValue(d));}, // data -> display
         yAxis = d3.svg.axis().scale(yScale).orient("left");
 
     // setup fill color
-    var cValue = function(d) { return d.continent;},
+    var cValue = function(d) { return d['country'];},
         color = d3.scale.category10();
 
     // add the graph canvas to the body of the webpage
@@ -74,12 +74,12 @@
         .style("opacity", 0);
 
     // load data
-    d3.csv("../CSV/continent_time.csv", function(error, data) {
+    d3.csv("../CSV/rain.csv", function(error, data) {
 
         // change string (from CSV) into number format
         data.forEach(function(d) {
-            d.year = +d.year;
-            d.suicide_per_100k = +d.suicide_per_100k;
+            d['year'] = +d['year'];
+            d['rainfall(MM)'] = +d['rainfall(MM)'];
         //    console.log(d);
         });
 
@@ -109,7 +109,7 @@
             .attr("y", 6)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Suicide_per_100k");
+            .text("Rainfall - (MM)");
 
         svg.selectAll("circle") //我移除點點的風格了，需要之後再設定(".dot")
             .data(data).enter() // create place holders if the data are new
@@ -125,7 +125,7 @@
                     .duration(200)
                     .style("opacity", 1);
                 // setup tooltip displayed location
-                tooltip.html(d.continent + "<br/> (" + xValue(d)
+                tooltip.html(d['country'] + "<br/> (" + xValue(d)
                 + ", " + yValue(d) + ")")
                     .style("left", (d3.event.pageX + 5) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
@@ -167,37 +167,38 @@
             .style("text-anchor", "end")
             .text(function(d) { return d;})
 
-        // legend.on("click", function(d) {
-        //     // dim all of the icons in legend
-        //     d3.selectAll(".legend")
-        //         .style("opacity", 0.1);
-        //     // make the one selected be un-dimmed
-        //     d3.select(this)
-        //         .style("opacity", 1);
-        //     // select all dots and apply 0 opacity (hide)
-        //     svg.selectAll("circle")
-        //     // .transition()
-        //     // .duration(500)
-        //     .style("opacity", 0.0)
-        //     // filter out the ones we want to show and apply properties
-        //     .filter(function(d) {
-        //         return d["id"] == d;
-        //     })
-        //     .style("opacity", 1) // need this line to unhide dots
-        //     .style("stroke", "black")
-        //     // apply stroke rule
-        //     .style("fill", function(d) {
-        //         if (d.hospital_expire_flag == 1) {
-        //             return this
-        //         } else {
-        //             return "white"
-        //         };
-        //     })
-        // });
+        legend.on("click", function(type) {
+            // dim all of the icons in legend
+            d3.selectAll(".legend")
+                .style("opacity", 0.1);
+            // make the one selected be un-dimmed
+            d3.select(this)
+                .style("opacity", 1);
+            // select all dots and apply 0 opacity (hide)
+            d3.selectAll("circle")
+            // .transition()
+            // .duration(500)
+            .style("opacity", 0.0)
+            // filter out the ones we want to show and apply properties
+            .filter(function(d) {
+                return d["country"] == type;
+            })
+                .style("opacity", 1) // need this line to unhide dots
+            // .style("stroke", "black")
+            // // apply stroke rule
+            // .style("fill", function(d) {
+            //     if (d['temperature(Celsius)'] == 1) {
+            //         return this
+            //     } else {
+            //         return "white"
+            //     };
+            // });
+        });
     });
 
 </script>
 
+<button><a href="temp.html" style="color: inherit;text-decoration:none;">Refresh</a></button>
 <button onclick="goBack()">Go Back</button>
 
 <script>
