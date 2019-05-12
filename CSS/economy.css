@@ -10,13 +10,6 @@ body, html {
     font-family: fantasy;
 }
 
-.center-content {
-    margin: 20px;
-    padding: 170px;
-    text-align: center;
-    font-family: fantasy;
-}
-
 div .row img{
     margin: 40px 0 10px; /*top ; right&left ; bottom*/
     width: 80%;
@@ -25,11 +18,7 @@ div .row img{
 .top_parallax {
     /* The image used */
     background-image: url('../pic/business-economy.jpg');
-
-	/*透明度*/
 	opacity: 0.9;
-	
-    /* Full height */
     height: 85%;
 
     /* Create the parallax scrolling effect */
@@ -42,11 +31,7 @@ div .row img{
 .middle_parallax {
     /* The image used */
     background-image: url('../pic/business-economy.jpg');
-
-	/*透明度*/
 	opacity: 0.7;
-	
-    /* Full height */
     height: 50%; 
 
     /* Create the parallax scrolling effect */
@@ -59,12 +44,9 @@ div .row img{
 .bottom_parallax {
     /* The image used */
     background-image: url('../pic/business-economy.jpg');
-
-	/*透明度*/
-	opacity: 0.5;
-	
-    /* Full height */
+    opacity: 0.5;
     height: 60%; 
+    padding: 180px;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -73,4 +55,6 @@ div .row img{
     background-size: cover;
     color: #ffffff;
     font-size: 20px;
+    text-align: center;
+    font-family: fantasy;
 }
