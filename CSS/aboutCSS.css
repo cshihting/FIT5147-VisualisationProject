@@ -6,10 +6,10 @@ body, html {
 
 .parallax {
     /* The image used */
-    background-image: url('../pic/suicide.jpg');
+    background-image: url('../pic/we_help.jpg');
 
 	/*透明度*/
-	opacity: 0.5;
+	opacity: 0.8;
 	
     /* Full height */
     height: 80%;

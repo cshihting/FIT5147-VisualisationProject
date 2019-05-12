@@ -13,6 +13,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
 </head>
 
@@ -39,6 +40,7 @@
                 <li><a href="#continent">Continent</a></li>
                 <li><a href="#gender">Gender</a></li>
                 <li><a href="#age">Age</a></li>
+                <li><a href="#method">Method</a></li>
               </ul>
             </li>
             <li><a href="#article">ARTICLES</a></li>
@@ -76,7 +78,7 @@
         <div class="col-sm-3">
         <p> 
           <a href="global_suicide.html" 
-            style="color: inherit;text-decoration:underline;">See more</a>
+            style="color: inherit;text-decoration:underline;">See the bar chart</a>
               about global suicide rate.
         </p>
         <p>Suicide has been a significant global health problem for many years 
@@ -101,7 +103,7 @@
 
   <div id="continent" class="container-fluid">
     <h1>Continent</h1>
-    <p>As you can see...</p>
+    <p>As you can see ...</p>
     <button>
       <a href="continent_scatter.html" 
           style="color: inherit;text-decoration:none;">Check the scatter plot by Continent.
@@ -161,14 +163,10 @@
     <div class="row">
       <div class="col-sm-3">
         <p>
-          Suicide is a hugely sensitive, complex issue with a tangled multitude 
-          of causes – and the very nature of a death by suicide means we can never 
-          fully know the reasons behind it. Still, as mental health awareness has 
-          grown, there is greater public understanding about potential contributing 
-          factors. With the chart below, you can find that men have the higher suicide 
-          rate than women. One of the questions that has persisted, though, regards this 
-          gender gap. It seems especially large given that women tend to have higher 
-          rates of depression diagnoses like the table shown beside.
+          With the chart below, you can find that men have the higher suicide rate than 
+          women. One of the questions that has persisted, though, regards this gender gap. 
+          It seems especially large given that women tend to have higher rates of depression 
+          diagnoses like the table shown beside.
         </p>
         <p>
           But men may be less likely to admit when they feel vulnerable, whether to 
@@ -188,10 +186,12 @@
       </div>
     </div>
 
-    <div class="wrapper" id="gender-chart">
+
+    <div class="row">
+    <div class="wrapper col-sm-12" id="gender-chart">
         <p>Suicides (per 100K) over Time by Gender</p>
     </div>
-    
+    </div>
     <script type="text/javascript">
 
         d3.csv('../CSV/reformatted_sex_time.csv', function(error, data) {
@@ -212,13 +212,17 @@
     </script>
     
     <script src="../JS/suicide_over_year.js" charset="utf-8"></script>
+    
   </div>
 
 
 
   <div id="age" class="container-fluid">
       <h1>Age</h1>
-      <p>As you can see...</p>
+      <p>Professor Henry Brodaty of the Centre for Healthy Brain Ageing , said lots of the 
+        older had passive suicide thoughts such as "I would be quite happy if I didn't wake 
+        up in the morning". As shown in the line chart below, we can find out that the 75+ 
+        years age group has the highest suicide rate.</p>
 
       <div class="wrapper" id="age-chart">
           <p>Suicides (per 100K) over Time by Age</p>
@@ -256,35 +260,87 @@
 
 
 
+  <div id="method" class="container-fluid">
+    <h1>Suicide Methods</h1>
+    <p>
+      A study results indicate that women as a group more frequently attempted suicide 
+      rather than actually committing it, whereas men were more likely to complete suicides 
+      and choose more violent suicide methods. Violent and highly lethal methods such as 
+      firearm suicide and hanging are more frequent among men, whereas women often choose 
+      poisoning or drowning, which are less violent and less lethal.
+    </p>
+
+    <p>
+      Take U.S. as an example. In 2017, firearms were the most common method of death 
+      by suicide, accounting for a little more than half (50.57%) of all suicide deaths. 
+      The next most common methods were suffocation (including hangings) at 27.72% and 
+      poisoning at 13.89%.
+    </p>
+    
+    
+    <div id="piechart"></div>
+
+    <!-- Add a reference to the Chart API at google.com -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+      ['Method', 'Count in 2017'],
+      ['Firearm', 23854],
+      ['Suffocation', 13075],
+      ['Poisoning', 6554],
+      ['Other', 3690]
+    ]);
+
+      // Optional; add a title and set the width and height of the chart
+      var options = {'title':'Suicide Methods in 2017', 'width':650, 'height':450};
+
+      // Display the chart inside the <div> element with id="piechart"
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+    </script>
+  </div>
+
+
+
   <div id="article" class="container article"> <!-- container-fluid 沒有寬度設定，通常用在滿版頁面-->
     <div class="row">
       <figure class="col-sm-3">
         <p>Economy</p>
-        <a href="#">
+        <a href="about.html">
           <img src="../pic/money.png" alt="Article1">
         </a>
       </figure>
       <figure class="col-sm-3">
         <p>Society</p>
-        <a href="#">
+        <a href="about.html">
           <img src="../pic/internet.png" alt="Article2">
         </a>
       </figure>
       <figure class="col-sm-3">
         <p>Gender</p>
-        <a href="#">
+        <a href="about.html">
           <img src="../pic/sex.png" alt="Article3">
         </a>
       </figure>
       <figure class="col-sm-3">
         <p>Weather</p>
-        <a href="#">
+        <a href="about.html">
           <img src="../pic/snowflake.png" alt="Article4">
         </a>
       </figure>
     </div>
   </div>
-    
+
+
+
   <footer class="container">
     <div class="row">
       <p class="col-sm-4">&copy; FIT5147-Data Exploration & Visualisation</p>
